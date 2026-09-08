@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donadores — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Donadores</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-donador')">+ Nuevo donador</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Donadores</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar donador...">
+            <select style="width:120px;"><option>Todos</option><option>Física</option><option>Moral</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Email</th><th>Teléfono</th><th>Puntos</th><th>Nivel</th><th>Activo</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#D01</td><td>María García López</td><td>Física</td><td>maria@ejemplo.com</td><td>222-100-0001</td><td>340</td><td><span class="badge badge-amber">Plata</span></td><td><span class="badge badge-green">Sí</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-reconocimiento')">Reconocimiento</button></td></tr>
+            <tr><td>#D02</td><td>Empresa Alfa S.A.</td><td>Moral</td><td>info@alfa.com</td><td>222-200-0002</td><td>1,200</td><td><span class="badge badge-blue">Oro</span></td><td><span class="badge badge-green">Sí</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-reconocimiento')">Reconocimiento</button></td></tr>
+            <tr><td>#D03</td><td>Luis Torres Reyes</td><td>Física</td><td>luis@ejemplo.com</td><td>222-300-0003</td><td>85</td><td><span class="badge badge-gray">Bronce</span></td><td><span class="badge badge-green">Sí</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-reconocimiento')">Reconocimiento</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nuevo donador -->
+<div class="modal-overlay" id="modal-donador">
+  <div class="modal">
+    <div class="modal-header"><h3>Nuevo donador</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-donador')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Nombre"></div>
+        <div class="form-group"><label>Apellido</label><input type="text" placeholder="Apellido"></div>
+        <div class="form-group"><label>Tipo *</label><select><option>Física</option><option>Moral</option></select></div>
+        <div class="form-group"><label>Razón social</label><input type="text" placeholder="Empresa o razón social"></div>
+        <div class="form-group full"><label>Email *</label><input type="email" placeholder="correo@ejemplo.com"></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="222-000-0000"></div>
+        <div class="form-group"><label>Fecha de registro</label><input type="date"></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2" placeholder="Notas adicionales..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-donador')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-donador','donador')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal reconocimiento -->
+<div class="modal-overlay" id="modal-reconocimiento">
+  <div class="modal">
+    <div class="modal-header"><h3>Emitir reconocimiento</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-reconocimiento')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Donador *</label><select><option>María García López</option><option>Empresa Alfa S.A.</option><option>Luis Torres Reyes</option></select></div>
+        <div class="form-group"><label>Tipo *</label><select><option>Participación</option><option>Destacado</option><option>Nivel</option></select></div>
+        <div class="form-group"><label>Campaña asociada</label><select><option>— Sin campaña —</option><option>Invierno 2026</option></select></div>
+        <div class="form-group"><label>Emitido por *</label><select><option>Eva Sánchez</option><option>Fernando Rosales</option></select></div>
+        <div class="form-group full"><label>Descripción (aparece en el PDF) *</label><textarea rows="3" placeholder="Texto que aparecerá en el documento PDF..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-reconocimiento')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-reconocimiento','reconocimiento')">Emitir</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('donadores');</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear cuenta — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<div class="register-wrap">
+  <div class="register-card">
+    <a href="login.html" class="register-back">← Volver al inicio de sesión</a>
+    <h2>Crear cuenta</h2>
+    <p>Completa el formulario para solicitar acceso al sistema</p>
+
+    <div id="reg-success" class="alert alert-success" style="display:none;">
+      Solicitud enviada. Un administrador activará tu cuenta pronto.
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nombre *</label>
+        <input type="text" id="reg-nombre" placeholder="Nombre">
+      </div>
+      <div class="form-group">
+        <label>Apellido *</label>
+        <input type="text" id="reg-apellido" placeholder="Apellido">
+      </div>
+      <div class="form-group full">
+        <label>Correo electrónico *</label>
+        <input type="email" id="reg-email" placeholder="correo@ejemplo.com">
+      </div>
+      <div class="form-group full">
+        <label>Teléfono</label>
+        <input type="tel" id="reg-tel" placeholder="222-000-0000">
+      </div>
+      <div class="form-group">
+        <label>Contraseña *</label>
+        <input type="password" id="reg-pass" placeholder="Mínimo 8 caracteres">
+      </div>
+      <div class="form-group">
+        <label>Confirmar contraseña *</label>
+        <input type="password" id="reg-pass2" placeholder="Repetir contraseña">
+      </div>
+      <div class="form-group full">
+        <label>Rol solicitado</label>
+        <select id="reg-rol">
+          <option>Voluntario</option>
+          <option>Donador</option>
+          <option>Organizador</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="login-btn" style="margin-top:1.25rem;" onclick="registrar()">Crear cuenta</button>
+  </div>
+</div>
+
+<script>
+function registrar() {
+  const nombre = document.getElementById('reg-nombre').value;
+  const email  = document.getElementById('reg-email').value;
+  const pass   = document.getElementById('reg-pass').value;
+  const pass2  = document.getElementById('reg-pass2').value;
+
+  if (!nombre || !email || !pass) { alert('Por favor completa los campos requeridos.'); return; }
+  if (pass !== pass2) { alert('Las contraseñas no coinciden.'); return; }
+  if (pass.length < 8) { alert('La contraseña debe tener al menos 8 caracteres.'); return; }
+
+  document.getElementById('reg-success').style.display = 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campañas — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Campañas</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-campana')">+ Nueva campaña</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Campañas</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar campaña...">
+            <select style="width:130px;">
+              <option>Todos los estados</option>
+              <option>Activa</option><option>Planificada</option><option>Cerrada</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Nombre</th><th>Tipo meta</th><th>Meta económica</th><th>Inicio</th><th>Cierre</th><th>Estado</th><th>Creada por</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#C001</td><td>Invierno 2026</td><td>Ambas</td><td>$50,000</td><td>2026-01-10</td><td>2026-03-31</td><td><span class="badge badge-green">Activa</span></td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-avance')">+ Avance</button></td></tr>
+            <tr><td>#C002</td><td>Víveres Marzo</td><td>Material</td><td>—</td><td>2026-03-01</td><td>2026-03-31</td><td><span class="badge badge-green">Activa</span></td><td>Fernando R.</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-avance')">+ Avance</button></td></tr>
+            <tr><td>#C003</td><td>Útiles Escolares</td><td>Económica</td><td>$20,000</td><td>2026-02-01</td><td>2026-04-30</td><td><span class="badge badge-amber">Planificada</span></td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-avance')">+ Avance</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva campaña -->
+<div class="modal-overlay" id="modal-campana">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva campaña</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-campana')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Nombre *</label><input type="text" placeholder="Nombre de la campaña"></div>
+        <div class="form-group"><label>Tipo de meta</label><select><option>Económica</option><option>Material</option><option>Ambas</option></select></div>
+        <div class="form-group"><label>Meta económica ($)</label><input type="number" placeholder="0.00"></div>
+        <div class="form-group"><label>Fecha inicio *</label><input type="date"></div>
+        <div class="form-group"><label>Fecha cierre *</label><input type="date"></div>
+        <div class="form-group"><label>Estado</label><select><option>Planificada</option><option>Activa</option><option>Cerrada</option></select></div>
+        <div class="form-group full"><label>Descripción</label><textarea rows="3" placeholder="Describe el objetivo de la campaña..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-campana')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-campana','campaña')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal avance de campaña -->
+<div class="modal-overlay" id="modal-avance">
+  <div class="modal">
+    <div class="modal-header"><h3>Registrar avance</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-avance')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Campaña *</label><select><option>Invierno 2026</option><option>Víveres Marzo</option></select></div>
+        <div class="form-group"><label>Fecha reporte *</label><input type="date"></div>
+        <div class="form-group"><label>Monto recaudado ($)</label><input type="number" placeholder="0.00"></div>
+        <div class="form-group"><label>Unidades recibidas</label><input type="number" placeholder="0"></div>
+        <div class="form-group full"><label>Notas</label><textarea rows="2" placeholder="Observaciones del avance..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-avance')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-avance','avance de campaña')">Guardar avance</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('campanas');</script>
+</body>
+</html>

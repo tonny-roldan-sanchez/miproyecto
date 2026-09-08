@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventario — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Inventario</div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="openModal('modal-movimiento')">+ Ajuste manual</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="alert alert-warning">
+        Stock bajo: <b>Medicamentos</b> — solo 4 cajas disponibles.
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Inventario por tipo de donación</h3></div>
+        <table>
+          <thead><tr><th>Tipo donación</th><th>Categoría</th><th>Unidad</th><th>Disponible</th><th>Total recibido</th><th>Total entregado</th><th>Última actualización</th><th>Actualizado por</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Víveres</td><td>Especie</td><td>kg</td><td><b>140</b></td><td>320</td><td>180</td><td>2026-03-19</td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-movimiento')">Movimiento</button></td></tr>
+            <tr><td>Ropa</td><td>Especie</td><td>pzas</td><td><b>83</b></td><td>200</td><td>117</td><td>2026-03-18</td><td>Jessica R.</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-movimiento')">Movimiento</button></td></tr>
+            <tr><td style="color:var(--danger);font-weight:500;">Medicamentos ⚠</td><td>Especie</td><td>cajas</td><td><b style="color:var(--danger);">4</b></td><td>50</td><td>46</td><td>2026-03-17</td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-movimiento')">Movimiento</button></td></tr>
+            <tr><td>Útiles escolares</td><td>Especie</td><td>pzas</td><td><b>62</b></td><td>100</td><td>38</td><td>2026-03-16</td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-movimiento')">Movimiento</button></td></tr>
+            <tr><td>Monetaria</td><td>Monetaria</td><td>pesos</td><td><b>$18,400</b></td><td>$84,200</td><td>$65,800</td><td>2026-03-19</td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-movimiento')">Movimiento</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Movimientos recientes</h3></div>
+        <table>
+          <thead><tr><th>ID</th><th>Inventario</th><th>Tipo movimiento</th><th>Cantidad</th><th>Stock anterior</th><th>Stock posterior</th><th>Tipo referencia</th><th>Motivo</th><th>Usuario</th><th>Fecha</th></tr></thead>
+          <tbody>
+            <tr><td>#M001</td><td>Víveres</td><td><span class="badge badge-green">Entrada</span></td><td>20 kg</td><td>120 kg</td><td>140 kg</td><td>Donación</td><td>—</td><td>Eva Sánchez</td><td>2026-03-19</td></tr>
+            <tr><td>#M002</td><td>Medicamentos</td><td><span class="badge badge-red">Salida</span></td><td>1 caja</td><td>5 cajas</td><td>4 cajas</td><td>Entrega</td><td>—</td><td>Jessica R.</td><td>2026-03-17</td></tr>
+            <tr><td>#M003</td><td>Ropa</td><td><span class="badge badge-amber">Ajuste</span></td><td>5 pzas</td><td>78 pzas</td><td>83 pzas</td><td>Ajuste manual</td><td>Conteo físico</td><td>Eva Sánchez</td><td>2026-03-18</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal movimiento de inventario -->
+<div class="modal-overlay" id="modal-movimiento">
+  <div class="modal">
+    <div class="modal-header"><h3>Movimiento de inventario</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-movimiento')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Tipo de donación *</label><select><option>Víveres</option><option>Ropa</option><option>Medicamentos</option><option>Útiles escolares</option><option>Monetaria</option></select></div>
+        <div class="form-group"><label>Tipo de movimiento *</label><select><option>Entrada</option><option>Salida</option><option>Ajuste</option></select></div>
+        <div class="form-group"><label>Cantidad *</label><input type="number" placeholder="0"></div>
+        <div class="form-group"><label>Tipo referencia</label><select><option>Donación</option><option>Entrega</option><option>Ajuste manual</option></select></div>
+        <div class="form-group full"><label>Motivo</label><input type="text" placeholder="Ej: Conteo físico, merma, etc."></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-movimiento')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-movimiento','movimiento de inventario')">Guardar movimiento</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('inventario');</script>
+</body>
+</html>

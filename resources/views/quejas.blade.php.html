@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quejas y Sugerencias — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Quejas y Sugerencias</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-queja')">+ Nueva queja / sugerencia</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="kpi"><div class="kpi-label">Total registros</div><div class="kpi-value">18</div></div>
+        <div class="kpi amber"><div class="kpi-label">Pendientes</div><div class="kpi-value">5</div></div>
+        <div class="kpi blue"><div class="kpi-label">Resueltos</div><div class="kpi-value">13</div></div>
+      </div>
+
+      <!-- Filtro de tabs por tipo -->
+      <div class="tabs" style="margin-bottom:10px;">
+        <div class="tab active">Todos</div>
+        <div class="tab">Quejas</div>
+        <div class="tab">Sugerencias</div>
+        <div class="tab">Pendientes</div>
+        <div class="tab">Resueltos</div>
+      </div>
+
+      <!-- Tarjetas de quejas/sugerencias -->
+      <div class="queja-card">
+        <div class="queja-header">
+          <span class="queja-asunto">Retraso en entrega de medicamentos</span>
+          <span class="badge badge-amber">Pendiente</span>
+        </div>
+        <div class="queja-meta">Queja · #Q001 · José R. Cruz · 2026-03-17 · Por: Jessica R.</div>
+        <div class="queja-msg">La entrega programada para el 15 de marzo no se realizó a tiempo. El beneficiario esperó más de 2 horas sin recibir notificación.</div>
+      </div>
+
+      <div class="queja-card">
+        <div class="queja-header">
+          <span class="queja-asunto">Sugerencia: notificaciones por WhatsApp</span>
+          <span class="badge badge-green">Resuelto</span>
+        </div>
+        <div class="queja-meta">Sugerencia · #S001 · María García López · 2026-03-10 · Por: Eva Sánchez</div>
+        <div class="queja-msg">Sería útil recibir notificaciones automáticas por WhatsApp cuando una entrega está en camino.</div>
+      </div>
+
+      <div class="queja-card">
+        <div class="queja-header">
+          <span class="queja-asunto">Víveres en mal estado</span>
+          <span class="badge badge-red">Urgente</span>
+        </div>
+        <div class="queja-meta">Queja · #Q002 · Ana M. Pérez · 2026-03-19 · Por: Jessica R.</div>
+        <div class="queja-msg">Los víveres recibidos en la entrega #E001 presentaban signos de descomposición en algunos productos perecederos.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva queja/sugerencia -->
+<div class="modal-overlay" id="modal-queja">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva queja / sugerencia</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-queja')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Tipo *</label><select><option>Queja</option><option>Sugerencia</option></select></div>
+        <div class="form-group"><label>Prioridad</label><select><option>Normal</option><option>Alta</option><option>Urgente</option></select></div>
+        <div class="form-group full"><label>Asunto *</label><input type="text" placeholder="Resumen del problema o sugerencia"></div>
+        <div class="form-group"><label>Relacionado con</label><select><option>— General —</option><option>Entrega</option><option>Donación</option><option>Beneficiario</option><option>Voluntario</option></select></div>
+        <div class="form-group"><label>Referencia (ID)</label><input type="text" placeholder="Ej: #E001"></div>
+        <div class="form-group"><label>Reportado por *</label><select><option>Jessica R.</option><option>Eva Sánchez</option><option>Carlos M.</option></select></div>
+        <div class="form-group"><label>Estado</label><select><option>Pendiente</option><option>En revisión</option><option>Resuelto</option></select></div>
+        <div class="form-group full"><label>Descripción *</label><textarea rows="4" placeholder="Describe con detalle el problema o sugerencia..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-queja')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-queja','queja')">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('quejas');</script>
+</body>
+</html>

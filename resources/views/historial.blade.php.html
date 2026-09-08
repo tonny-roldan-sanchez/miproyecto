@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historial de Accesos — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Historial de Accesos</div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary btn-sm">Exportar CSV</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Registro de sesiones</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar usuario...">
+            <input type="date" style="width:140px;">
+            <select style="width:130px;"><option>Todos los roles</option><option>Administrador</option><option>Organizador</option><option>Voluntario</option></select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th><th>Usuario</th><th>Rol</th><th>Acción</th>
+              <th>IP</th><th>Dispositivo</th><th>Fecha y hora</th><th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#L001</td><td>Eva Sánchez</td><td><span class="badge badge-blue">Admin</span></td>
+              <td>Inicio de sesión</td><td>187.190.12.4</td><td>Chrome / Windows</td>
+              <td>2026-03-19 08:02</td><td><span class="badge badge-green">Exitoso</span></td>
+            </tr>
+            <tr>
+              <td>#L002</td><td>Jessica R.</td><td><span class="badge badge-gray">Voluntario</span></td>
+              <td>Inicio de sesión</td><td>187.190.12.8</td><td>Safari / iPhone</td>
+              <td>2026-03-19 08:30</td><td><span class="badge badge-green">Exitoso</span></td>
+            </tr>
+            <tr>
+              <td>#L003</td><td>desconocido</td><td>—</td>
+              <td>Intento fallido</td><td>201.145.87.22</td><td>Firefox / Linux</td>
+              <td>2026-03-18 23:14</td><td><span class="badge badge-red">Fallido</span></td>
+            </tr>
+            <tr>
+              <td>#L004</td><td>Eva Sánchez</td><td><span class="badge badge-blue">Admin</span></td>
+              <td>Cierre de sesión</td><td>187.190.12.4</td><td>Chrome / Windows</td>
+              <td>2026-03-18 18:45</td><td><span class="badge badge-gray">Cerrado</span></td>
+            </tr>
+            <tr>
+              <td>#L005</td><td>Carlos M.</td><td><span class="badge badge-gray">Voluntario</span></td>
+              <td>Inicio de sesión</td><td>187.190.14.2</td><td>Chrome / Android</td>
+              <td>2026-03-18 09:10</td><td><span class="badge badge-green">Exitoso</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('historial');</script>
+</body>
+</html>

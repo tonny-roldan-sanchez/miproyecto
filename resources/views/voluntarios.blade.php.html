@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voluntarios — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Voluntarios</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-voluntario')">+ Nuevo voluntario</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Voluntarios</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar voluntario...">
+            <select style="width:160px;"><option>Todas las disponibilidades</option><option>Tiempo completo</option><option>Lunes–viernes</option><option>Fines de semana</option><option>Bajo demanda</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Zona asignada</th><th>Disponibilidad</th><th>Fecha ingreso</th><th>Activo</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#V001</td><td>Jessica R.</td><td>222-500-0001</td><td>San Marcos</td><td><span class="badge badge-blue">Tiempo completo</span></td><td>2025-06-01</td><td><span class="badge badge-green">Sí</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignacion')">Ver asignaciones</button></td></tr>
+            <tr><td>#V002</td><td>Carlos M.</td><td>222-500-0002</td><td>La Loma</td><td><span class="badge badge-gray">Fines de semana</span></td><td>2025-09-15</td><td><span class="badge badge-green">Sí</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignacion')">Ver asignaciones</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Asignaciones de voluntarios</h3>
+          <button class="btn btn-primary" onclick="openModal('modal-asignacion')">+ Nueva asignación</button>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Voluntario</th><th>Entrega</th><th>Asignado por</th><th>Fecha asignación</th><th>Fecha compromiso</th><th>Estado</th><th>Observaciones</th></tr></thead>
+          <tbody>
+            <tr><td>#A001</td><td>Jessica R.</td><td>#E002 — Medicamentos</td><td>Eva Sánchez</td><td>2026-03-18 08:00</td><td>2026-03-20 09:00</td><td><span class="badge badge-amber">Pendiente</span></td><td>—</td></tr>
+            <tr><td>#A002</td><td>Jessica R.</td><td>#E003 — Ropa 3 pzas</td><td>Eva Sánchez</td><td>2026-03-19 07:30</td><td>2026-03-19 14:00</td><td><span class="badge badge-blue">En camino</span></td><td>Salió puntual</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nuevo voluntario -->
+<div class="modal-overlay" id="modal-voluntario">
+  <div class="modal">
+    <div class="modal-header"><h3>Nuevo voluntario</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-voluntario')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Usuario del sistema *</label><select><option>— Seleccionar usuario —</option><option>Jessica R.</option><option>Carlos M.</option></select></div>
+        <div class="form-group"><label>Teléfono *</label><input type="tel" placeholder="222-000-0000"></div>
+        <div class="form-group"><label>Zona asignada</label><input type="text" placeholder="Colonia o municipio"></div>
+        <div class="form-group"><label>Disponibilidad</label><select><option>Tiempo completo</option><option>Lunes–viernes</option><option>Fines de semana</option><option>Bajo demanda</option></select></div>
+        <div class="form-group"><label>Fecha de ingreso *</label><input type="date"></div>
+        <div class="form-group"><label>Activo</label><select><option>Sí</option><option>No</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-voluntario')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-voluntario','voluntario')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva asignación -->
+<div class="modal-overlay" id="modal-asignacion">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva asignación</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-asignacion')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Voluntario *</label><select><option>— Seleccionar —</option><option>Jessica R.</option><option>Carlos M.</option></select></div>
+        <div class="form-group"><label>Entrega *</label><select><option>— Seleccionar —</option><option>#E002 — Medicamentos</option><option>#E003 — Ropa</option></select></div>
+        <div class="form-group"><label>Fecha compromiso *</label><input type="date"></div>
+        <div class="form-group"><label>Hora compromiso</label><input type="time"></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2" placeholder="Instrucciones adicionales..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-asignacion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-asignacion','asignación')">Asignar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('voluntarios');</script>
+</body>
+</html>

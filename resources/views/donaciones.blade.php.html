@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donaciones — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Donaciones</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-donacion')">+ Nueva donación</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <!-- KPIs de donaciones -->
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Total recibido</div><div class="kpi-value">$84,200</div></div>
+        <div class="kpi amber"><div class="kpi-label">Pendientes</div><div class="kpi-value">14</div></div>
+        <div class="kpi blue"><div class="kpi-label">Asignadas</div><div class="kpi-value">38</div></div>
+        <div class="kpi"><div class="kpi-label">Entregadas</div><div class="kpi-value">579</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Donaciones</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar...">
+            <select style="width:120px;"><option>Todos</option><option>Pendiente</option><option>Asignada</option><option>Entregada</option></select>
+          </div>
+        </div>
+        <!-- Filtros por tab -->
+        <div class="tabs">
+          <div class="tab active">Todas</div>
+          <div class="tab">Pendientes</div>
+          <div class="tab">Asignadas</div>
+          <div class="tab">Entregadas</div>
+          <div class="tab">Monetarias</div>
+          <div class="tab">En especie</div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Donador</th><th>Tipo</th><th>Cantidad</th><th>Fecha recepción</th><th>Campaña</th><th>Registrado por</th><th>Estado</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#R001</td><td>María García</td><td>Víveres</td><td>20 kg</td><td>2026-03-15</td><td>Víveres Marzo</td><td>Eva Sánchez</td><td><span class="badge badge-green">Entregada</span></td><td><button class="btn btn-secondary btn-sm">Ver</button></td></tr>
+            <tr><td>#R002</td><td>Empresa Alfa</td><td>Monetaria</td><td>$5,000</td><td>2026-03-16</td><td>Útiles</td><td>Eva Sánchez</td><td><span class="badge badge-amber">Pendiente</span></td><td><button class="btn btn-primary btn-sm" onclick="openModal('modal-entrega')">Asignar</button></td></tr>
+            <tr><td>#R003</td><td>Luis Torres</td><td>Ropa</td><td>15 pzas</td><td>2026-03-17</td><td>Invierno 2026</td><td>Jessica R.</td><td><span class="badge badge-blue">Asignada</span></td><td><button class="btn btn-secondary btn-sm">Ver</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva donación -->
+<div class="modal-overlay" id="modal-donacion">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva donación</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-donacion')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Donador *</label><select><option>— Seleccionar —</option><option>María García López</option><option>Empresa Alfa S.A.</option><option>Luis Torres Reyes</option></select></div>
+        <div class="form-group"><label>Tipo de donación *</label><select><option>Monetaria</option><option>Víveres</option><option>Ropa</option><option>Medicamentos</option><option>Útiles escolares</option></select></div>
+        <div class="form-group"><label>Cantidad / Monto *</label><input type="text" placeholder="Ej: 20 kg o $5,000"></div>
+        <div class="form-group"><label>Fecha recepción *</label><input type="date"></div>
+        <div class="form-group"><label>Campaña</label><select><option>— Sin campaña —</option><option>Invierno 2026</option><option>Víveres Marzo</option></select></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2" placeholder="Notas sobre la donación..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-donacion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-donacion','donación')">Registrar donación</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal asignar entrega desde donación pendiente -->
+<div class="modal-overlay" id="modal-entrega">
+  <div class="modal">
+    <div class="modal-header"><h3>Asignar a entrega</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-entrega')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Beneficiario *</label><select><option>— Seleccionar —</option><option>Ana M. Pérez Ruiz</option><option>José R. Cruz Hdz.</option></select></div>
+        <div class="form-group"><label>Cantidad a entregar *</label><input type="text" placeholder="Ej: 5 kg"></div>
+        <div class="form-group"><label>Fecha programada *</label><input type="date"></div>
+        <div class="form-group full"><label>Responsable *</label><select><option>Jessica R.</option><option>Carlos M.</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-entrega')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-entrega','entrega')">Asignar entrega</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('donaciones');</script>
+</body>
+</html>

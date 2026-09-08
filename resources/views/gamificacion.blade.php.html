@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamificación — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar"><div class="topbar-title">Gamificación</div></div>
+    <div class="content">
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Niveles definidos</div><div class="kpi-value">4</div></div>
+        <div class="kpi amber"><div class="kpi-label">Insignias activas</div><div class="kpi-value">8</div></div>
+        <div class="kpi blue"><div class="kpi-label">Reconocimientos emitidos</div><div class="kpi-value">23</div></div>
+        <div class="kpi pink"><div class="kpi-label">Donadores con nivel</div><div class="kpi-value">86</div></div>
+      </div>
+
+      <div class="two-col">
+        <!-- Niveles -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Niveles de gamificación</h3>
+            <button class="btn btn-primary" onclick="openModal('modal-nivel')">+ Nuevo nivel</button>
+          </div>
+          <table>
+            <thead><tr><th>ID</th><th>Nombre</th><th>Pts mínimos</th><th>Pts máximos</th><th>Descripción</th></tr></thead>
+            <tbody>
+              <tr><td>#N1</td><td><span class="badge badge-gray">Bronce</span></td><td>0</td><td>99</td><td>Primer nivel</td></tr>
+              <tr><td>#N2</td><td><span class="badge badge-amber">Plata</span></td><td>100</td><td>499</td><td>Donador frecuente</td></tr>
+              <tr><td>#N3</td><td><span class="badge badge-blue">Oro</span></td><td>500</td><td>999</td><td>Donador destacado</td></tr>
+              <tr><td>#N4</td><td><span class="badge badge-pink">Diamante</span></td><td>1000</td><td>—</td><td>Donador élite</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Insignias -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Insignias</h3>
+            <button class="btn btn-primary" onclick="openModal('modal-insignia')">+ Nueva insignia</button>
+          </div>
+          <div class="insignia-grid">
+            <div class="ins-card"><div class="ins-icon">🌱</div><div class="ins-name">Primera donación</div><div class="ins-pts">+10 pts</div><div class="ins-status"><span class="badge badge-green">Activa</span></div></div>
+            <div class="ins-card"><div class="ins-icon">🔥</div><div class="ins-name">Donador frecuente</div><div class="ins-pts">+50 pts</div><div class="ins-status"><span class="badge badge-green">Activa</span></div></div>
+            <div class="ins-card"><div class="ins-icon">⭐</div><div class="ins-name">Donador destacado</div><div class="ins-pts">+100 pts</div><div class="ins-status"><span class="badge badge-green">Activa</span></div></div>
+            <div class="ins-card"><div class="ins-icon">💎</div><div class="ins-name">Gran contribuidor</div><div class="ins-pts">+200 pts</div><div class="ins-status"><span class="badge badge-green">Activa</span></div></div>
+            <div class="ins-card"><div class="ins-icon">🏅</div><div class="ins-name">Campaña completada</div><div class="ins-pts">+75 pts</div><div class="ins-status"><span class="badge badge-green">Activa</span></div></div>
+            <div class="ins-card" onclick="openModal('modal-asignar-insignia')"><div class="ins-icon">+</div><div class="ins-name">Asignar insignia</div><div class="ins-pts">a donador</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reconocimientos -->
+      <div class="card" style="margin-top:10px;">
+        <div class="card-header">
+          <h3>Reconocimientos emitidos</h3>
+          <button class="btn btn-primary" onclick="openModal('modal-reconocimiento')">+ Nuevo reconocimiento</button>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Donador</th><th>Campaña</th><th>Tipo</th><th>Descripción</th><th>Fecha emisión</th><th>Emitido por</th></tr></thead>
+          <tbody>
+            <tr><td>#RC001</td><td>Empresa Alfa S.A.</td><td>Invierno 2026</td><td><span class="badge badge-blue">Destacado</span></td><td>Donación destacada en campaña</td><td>2026-03-10</td><td>Eva Sánchez</td></tr>
+            <tr><td>#RC002</td><td>María García López</td><td>Víveres Marzo</td><td><span class="badge badge-green">Participación</span></td><td>Participación activa en campaña</td><td>2026-03-12</td><td>Eva Sánchez</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nuevo nivel -->
+<div class="modal-overlay" id="modal-nivel">
+  <div class="modal">
+    <div class="modal-header"><h3>Nuevo nivel</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-nivel')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Nombre del nivel *</label><input type="text" placeholder="Ej: Bronce, Plata, Oro..."></div>
+        <div class="form-group"><label>Puntos mínimos *</label><input type="number" placeholder="0" min="0"></div>
+        <div class="form-group"><label>Puntos máximos</label><input type="number" placeholder="99"></div>
+        <div class="form-group full"><label>Descripción</label><input type="text" placeholder="Descripción del nivel"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-nivel')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-nivel','nivel')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva insignia -->
+<div class="modal-overlay" id="modal-insignia">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva insignia</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-insignia')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Nombre de la insignia"></div>
+        <div class="form-group"><label>Emoji / Icono</label><input type="text" placeholder="🌱"></div>
+        <div class="form-group"><label>Puntos otorgados *</label><input type="number" placeholder="0" min="0"></div>
+        <div class="form-group"><label>Estado</label><select><option>Activa</option><option>Inactiva</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-insignia')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-insignia','insignia')">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal asignar insignia a donador -->
+<div class="modal-overlay" id="modal-asignar-insignia">
+  <div class="modal">
+    <div class="modal-header"><h3>Asignar insignia a donador</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-asignar-insignia')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Donador *</label><select><option>— Seleccionar —</option><option>María García López</option><option>Empresa Alfa S.A.</option></select></div>
+        <div class="form-group"><label>Insignia *</label><select><option>— Seleccionar —</option><option>🌱 Primera donación (+10 pts)</option><option>🔥 Donador frecuente (+50 pts)</option><option>⭐ Donador destacado (+100 pts)</option></select></div>
+        <div class="form-group full"><label>Asignado por *</label><select><option>Eva Sánchez</option><option>Jessica R.</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-asignar-insignia')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-asignar-insignia','asignación de insignia')">Asignar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal reconocimiento -->
+<div class="modal-overlay" id="modal-reconocimiento">
+  <div class="modal">
+    <div class="modal-header"><h3>Emitir reconocimiento</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-reconocimiento')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Donador *</label><select><option>— Seleccionar —</option><option>María García López</option><option>Empresa Alfa S.A.</option></select></div>
+        <div class="form-group"><label>Tipo *</label><select><option>Participación</option><option>Destacado</option><option>Nivel</option></select></div>
+        <div class="form-group"><label>Campaña asociada</label><select><option>— Sin campaña —</option><option>Invierno 2026</option></select></div>
+        <div class="form-group"><label>Emitido por *</label><select><option>Eva Sánchez</option><option>Fernando Rosales</option></select></div>
+        <div class="form-group full"><label>Descripción (aparece en el PDF) *</label><textarea rows="3" placeholder="Texto que aparecerá en el documento PDF..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-reconocimiento')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-reconocimiento','reconocimiento')">Emitir reconocimiento</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('gamificacion');</script>
+</body>
+</html>

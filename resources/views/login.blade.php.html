@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar sesión — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <!-- Panel izquierdo con estadísticas -->
+  <div class="login-left">
+    <div style="position:relative;z-index:1;">
+      <div class="login-brand">Juventud Iskalli</div>
+      <div class="login-tagline">Sistema Integral de Donaciones y Beneficiarios</div>
+      <div class="login-stats">
+        <div class="ls-item"><div class="ls-num">248</div><div class="ls-lbl">Beneficiarios</div></div>
+        <div class="ls-item"><div class="ls-num">86</div><div class="ls-lbl">Donadores</div></div>
+        <div class="ls-item"><div class="ls-num">12</div><div class="ls-lbl">Campañas</div></div>
+      </div>
+      <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+        <p style="font-size:11px;color:rgba(255,255,255,.25);">Puebla, México · v1.0 · 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario de login -->
+  <div class="login-right">
+    <div class="login-form">
+      <h2>Iniciar sesión</h2>
+      <p>Ingresa tus credenciales para acceder al sistema</p>
+
+      <!-- Error de autenticación -->
+      <div id="login-error" class="login-error">
+        Credenciales incorrectas. Intento <span id="intento-num">1</span> de 3.
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" id="login-email" placeholder="correo@iskalli.org">
+      </div>
+      <div class="form-group" style="margin-top:.75rem;">
+        <label>Contraseña</label>
+        <input type="password" id="login-pass" placeholder="••••••••">
+      </div>
+      <div class="forgot">¿Olvidaste tu contraseña?</div>
+      <button class="login-btn" onclick="doLogin()">Entrar al sistema</button>
+      <p style="font-size:11.5px;text-align:center;margin-top:1.2rem;color:var(--muted);">
+        ¿No tienes cuenta? <a href="registro.html" style="color:var(--accent);font-weight:500;">Crear cuenta</a>
+      </p>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:1rem;">
+        Demo: admin@iskalli.org / admin123
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+let intentos = 0;
+
+function doLogin() {
+  const e   = document.getElementById('login-email').value;
+  const p   = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-error');
+
+  if (e === 'admin@iskalli.org' && p === 'admin123') {
+    /* Redirige al sistema principal */
+    window.location.href = '../index.html';
+  } else {
+    intentos++;
+    document.getElementById('intento-num').textContent = intentos;
+    err.classList.add('show');
+    if (intentos >= 3) err.textContent = 'Cuenta bloqueada temporalmente. Contacta al administrador.';
+  }
+}
+
+/* Permite enviar con Enter */
+document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+</body>
+</html>

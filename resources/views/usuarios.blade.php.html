@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usuarios — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Usuarios</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-usuario')">+ Nuevo usuario</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Usuarios del sistema</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar usuario...">
+            <select style="width:140px;"><option>Todos los roles</option><option>Administrador</option><option>Organizador</option><option>Voluntario</option><option>Donador</option><option>Beneficiario</option></select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Último acceso</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#U001</td><td>Eva Sánchez</td><td>admin@iskalli.org</td>
+              <td><span class="badge badge-blue">Administrador</span></td>
+              <td><span class="badge badge-green">Activo</span></td>
+              <td>2026-03-19 08:02</td>
+              <td>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-usuario')">Editar</button>
+                <button class="btn btn-danger btn-sm">Desactivar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#U002</td><td>Jessica R.</td><td>jessica@iskalli.org</td>
+              <td><span class="badge badge-gray">Voluntario</span></td>
+              <td><span class="badge badge-green">Activo</span></td>
+              <td>2026-03-19 08:30</td>
+              <td>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-usuario')">Editar</button>
+                <button class="btn btn-danger btn-sm">Desactivar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#U003</td><td>Carlos M.</td><td>carlos@iskalli.org</td>
+              <td><span class="badge badge-gray">Voluntario</span></td>
+              <td><span class="badge badge-green">Activo</span></td>
+              <td>2026-03-18 09:10</td>
+              <td>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-usuario')">Editar</button>
+                <button class="btn btn-danger btn-sm">Desactivar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#U004</td><td>Fernando Rosales</td><td>fernando@iskalli.org</td>
+              <td><span class="badge badge-amber">Organizador</span></td>
+              <td><span class="badge badge-gray">Inactivo</span></td>
+              <td>2026-03-10 17:22</td>
+              <td>
+                <button class="btn btn-secondary btn-sm" onclick="openModal('modal-usuario')">Editar</button>
+                <button class="btn btn-primary btn-sm">Activar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nuevo/editar usuario -->
+<div class="modal-overlay" id="modal-usuario">
+  <div class="modal">
+    <div class="modal-header"><h3>Nuevo usuario</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-usuario')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Nombre"></div>
+        <div class="form-group"><label>Apellido *</label><input type="text" placeholder="Apellido"></div>
+        <div class="form-group full"><label>Email *</label><input type="email" placeholder="correo@iskalli.org"></div>
+        <div class="form-group"><label>Contraseña *</label><input type="password" placeholder="Mínimo 8 caracteres"></div>
+        <div class="form-group"><label>Confirmar contraseña *</label><input type="password" placeholder="Repetir contraseña"></div>
+        <div class="form-group"><label>Rol *</label>
+          <select>
+            <option>Administrador</option><option>Organizador</option>
+            <option>Voluntario</option><option>Donador</option><option>Beneficiario</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Estado</label><select><option>Activo</option><option>Inactivo</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-usuario')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-usuario','usuario')">Crear usuario</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('usuarios');</script>
+</body>
+</html>

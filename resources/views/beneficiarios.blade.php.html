@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beneficiarios — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Beneficiarios</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-beneficiario')">+ Registrar beneficiario</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">248</div></div>
+        <div class="kpi amber"><div class="kpi-label">Activos</div><div class="kpi-value">210</div></div>
+        <div class="kpi blue"><div class="kpi-label">En revisión</div><div class="kpi-value">38</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Beneficiarios</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar beneficiario...">
+            <select style="width:120px;"><option>Todos</option><option>Activo</option><option>En revisión</option><option>Inactivo</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Nombre completo</th><th>Edad</th><th>Comunidad</th><th>Teléfono</th><th>Tipo apoyo</th><th>Estado</th><th>Registrado por</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#B001</td><td>Ana M. Pérez Ruiz</td><td>34</td><td>San Marcos</td><td>222-111-0001</td><td>Víveres</td><td><span class="badge badge-green">Activo</span></td><td>Jessica R.</td><td><button class="btn btn-secondary btn-sm">Ver</button></td></tr>
+            <tr><td>#B002</td><td>José R. Cruz Hdz.</td><td>67</td><td>La Loma</td><td>222-111-0002</td><td>Medicamentos</td><td><span class="badge badge-green">Activo</span></td><td>Jessica R.</td><td><button class="btn btn-secondary btn-sm">Ver</button></td></tr>
+            <tr><td>#B003</td><td>María F. Soto Gzz.</td><td>12</td><td>El Rincón</td><td>222-111-0003</td><td>Útiles</td><td><span class="badge badge-amber">Revisión</span></td><td>Eva Sánchez</td><td><button class="btn btn-secondary btn-sm">Ver</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal registrar beneficiario -->
+<div class="modal-overlay" id="modal-beneficiario">
+  <div class="modal">
+    <div class="modal-header"><h3>Registrar beneficiario</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-beneficiario')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Nombre(s)"></div>
+        <div class="form-group"><label>Apellido *</label><input type="text" placeholder="Apellidos"></div>
+        <div class="form-group"><label>Edad</label><input type="number" placeholder="0" min="0" max="120"></div>
+        <div class="form-group"><label>CURP</label><input type="text" placeholder="XXXX000000XXXXXX00"></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" placeholder="222-000-0000"></div>
+        <div class="form-group"><label>Comunidad *</label><input type="text" placeholder="San Marcos, La Loma..."></div>
+        <div class="form-group"><label>Tipo de apoyo *</label><select><option>Víveres</option><option>Medicamentos</option><option>Ropa</option><option>Útiles escolares</option><option>Múltiple</option></select></div>
+        <div class="form-group"><label>Estado</label><select><option>Activo</option><option>En revisión</option><option>Inactivo</option></select></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2" placeholder="Información adicional del beneficiario..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-beneficiario')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-beneficiario','beneficiario')">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('beneficiarios');</script>
+</body>
+</html>

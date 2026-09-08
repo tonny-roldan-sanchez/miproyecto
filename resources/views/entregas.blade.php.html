@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entregas — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Entregas</div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="openModal('modal-entrega')">+ Nueva entrega</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="kpi"><div class="kpi-label">Total entregas</div><div class="kpi-value">631</div></div>
+        <div class="kpi amber"><div class="kpi-label">Programadas</div><div class="kpi-value">12</div></div>
+        <div class="kpi blue"><div class="kpi-label">En camino</div><div class="kpi-value">5</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Entregas</h3>
+          <div class="toolbar">
+            <input type="text" class="search-input" placeholder="Buscar entrega...">
+            <select style="width:120px;"><option>Todos</option><option>Programada</option><option>En camino</option><option>Completada</option><option>Cancelada</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Donación</th><th>Beneficiario</th><th>Cantidad</th><th>Fecha entrega</th><th>Responsable</th><th>Estado</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#E001</td><td>Víveres 20kg</td><td>Ana M. Pérez</td><td>5 kg</td><td>2026-03-15 10:00</td><td>Jessica R.</td><td><span class="badge badge-green">Completada</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignacion')">Asignar voluntario</button></td></tr>
+            <tr><td>#E002</td><td>Medicamentos</td><td>José R. Cruz</td><td>1 caja</td><td>2026-03-20 09:00</td><td>Jessica R.</td><td><span class="badge badge-amber">Programada</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-asignacion')">Asignar voluntario</button></td></tr>
+            <tr><td>#E003</td><td>Ropa 15 pzas</td><td>María F. Soto</td><td>3 pzas</td><td>2026-03-19 14:00</td><td>Jessica R.</td><td><span class="badge badge-blue">En camino</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesion')">Ver GPS</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva entrega -->
+<div class="modal-overlay" id="modal-entrega">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva entrega</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-entrega')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Donación *</label><select><option>— Seleccionar —</option><option>#R001 — Víveres 20 kg</option><option>#R002 — Monetaria $5,000</option></select></div>
+        <div class="form-group full"><label>Beneficiario *</label><select><option>— Seleccionar —</option><option>Ana M. Pérez Ruiz</option><option>José R. Cruz Hdz.</option></select></div>
+        <div class="form-group"><label>Cantidad a entregar *</label><input type="text" placeholder="Ej: 5 kg"></div>
+        <div class="form-group"><label>Fecha programada *</label><input type="date"></div>
+        <div class="form-group"><label>Hora programada</label><input type="time"></div>
+        <div class="form-group"><label>Responsable *</label><select><option>Jessica R.</option><option>Carlos M.</option></select></div>
+        <div class="form-group full"><label>Dirección de entrega</label><input type="text" placeholder="Calle, colonia, municipio"></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2" placeholder="Instrucciones especiales..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-entrega')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-entrega','entrega')">Registrar entrega</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal asignar voluntario -->
+<div class="modal-overlay" id="modal-asignacion">
+  <div class="modal">
+    <div class="modal-header"><h3>Asignar voluntario</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-asignacion')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Voluntario *</label><select><option>— Seleccionar —</option><option>Jessica R.</option><option>Carlos M.</option></select></div>
+        <div class="form-group full"><label>Entrega *</label><select><option>#E002 — Medicamentos</option><option>#E003 — Ropa</option></select></div>
+        <div class="form-group"><label>Fecha compromiso *</label><input type="date"></div>
+        <div class="form-group"><label>Hora compromiso</label><input type="time"></div>
+        <div class="form-group full"><label>Observaciones</label><textarea rows="2"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-asignacion')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-asignacion','asignación')">Asignar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal GPS / sesión de entrega -->
+<div class="modal-overlay" id="modal-sesion">
+  <div class="modal">
+    <div class="modal-header"><h3>Sesión de entrega GPS</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-sesion')">✕</button></div>
+    <div class="modal-body">
+      <div style="background:var(--bg);border-radius:8px;height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;margin-bottom:1rem;">🗺 Vista del mapa GPS aquí</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Latitud</label><input type="text" placeholder="19.0000" readonly></div>
+        <div class="form-group"><label>Longitud</label><input type="text" placeholder="-98.0000" readonly></div>
+        <div class="form-group full"><label>Estado de sesión</label><select><option>En camino</option><option>Completada</option><option>Problema</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-sesion')">Cerrar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-sesion','entrega')">Actualizar estado</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('entregas');</script>
+</body>
+</html>

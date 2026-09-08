@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notificaciones — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Notificaciones</div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary btn-sm" onclick="openModal('modal-notif')">+ Nueva notificación</button>
+        <button class="btn btn-secondary btn-sm">Marcar todas como leídas</button>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="tabs" style="margin-bottom:10px;">
+        <div class="tab active">Todas</div>
+        <div class="tab">No leídas</div>
+        <div class="tab">Alertas</div>
+        <div class="tab">Campañas</div>
+        <div class="tab">Entregas</div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Bandeja de notificaciones</h3></div>
+
+        <div class="notif-item" style="background:#fafaf8;">
+          <div class="notif-icon" style="background:#FDECEA;">⚠</div>
+          <div class="notif-body">
+            <div class="notif-asunto">Stock bajo — Medicamentos</div>
+            <div class="notif-msg">Solo quedan 4 cajas disponibles. Se recomienda solicitar nuevas donaciones.</div>
+            <div class="notif-meta"><span>Sistema</span><span>hace 1h</span><span class="badge badge-red">No leída</span></div>
+          </div>
+        </div>
+
+        <div class="notif-item" style="background:#fafaf8;">
+          <div class="notif-icon" style="background:#E5EEFF;">📦</div>
+          <div class="notif-body">
+            <div class="notif-asunto">Entrega #E003 en camino</div>
+            <div class="notif-msg">Jessica R. salió hacia El Rincón con 3 piezas de ropa para María F. Soto.</div>
+            <div class="notif-meta"><span>Sistema</span><span>hace 2h</span><span class="badge badge-red">No leída</span></div>
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#E4F5ED;">💰</div>
+          <div class="notif-body">
+            <div class="notif-asunto">Nueva donación registrada</div>
+            <div class="notif-msg">Empresa Alfa S.A. realizó una donación monetaria de $5,000 a la campaña Útiles Escolares.</div>
+            <div class="notif-meta"><span>Eva Sánchez</span><span>hace 3h</span></div>
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#FEF5DC;">📣</div>
+          <div class="notif-body">
+            <div class="notif-asunto">Campaña Víveres Marzo al 80%</div>
+            <div class="notif-msg">La campaña ha alcanzado el 80% de su meta de recaudación.</div>
+            <div class="notif-meta"><span>Sistema</span><span>ayer</span></div>
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <div class="notif-icon" style="background:#E4F5ED;">✓</div>
+          <div class="notif-body">
+            <div class="notif-asunto">Entrega #E001 completada</div>
+            <div class="notif-msg">Ana M. Pérez Ruiz recibió 5 kg de víveres. Entrega confirmada por Jessica R.</div>
+            <div class="notif-meta"><span>Sistema</span><span>2026-03-15</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal nueva notificación manual -->
+<div class="modal-overlay" id="modal-notif">
+  <div class="modal">
+    <div class="modal-header"><h3>Nueva notificación</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-notif')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full"><label>Asunto *</label><input type="text" placeholder="Título de la notificación"></div>
+        <div class="form-group"><label>Tipo</label><select><option>General</option><option>Alerta</option><option>Campaña</option><option>Entrega</option></select></div>
+        <div class="form-group"><label>Destinatario</label><select><option>Todos los usuarios</option><option>Administradores</option><option>Voluntarios</option><option>Eva Sánchez</option></select></div>
+        <div class="form-group full"><label>Mensaje *</label><textarea rows="3" placeholder="Contenido de la notificación..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-notif')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-notif','queja')">Enviar notificación</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('notificaciones');</script>
+</body>
+</html>

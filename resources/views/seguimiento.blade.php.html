@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento GPS — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar"><div class="topbar-title">Seguimiento GPS</div></div>
+    <div class="content">
+
+      <div class="two-col">
+        <!-- Mapa simulado -->
+        <div class="card" style="grid-column:1/-1;">
+          <div class="card-header"><h3>Mapa de entregas activas</h3></div>
+          <div style="background:var(--bg);height:280px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;border-radius:0 0 var(--radius) var(--radius);">
+            🗺 Aquí se integrará el mapa de Google Maps / Leaflet con las sesiones activas
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Sesiones de entrega</h3></div>
+        <table>
+          <thead><tr><th>ID Sesión</th><th>Entrega</th><th>Voluntario</th><th>Inicio</th><th>Última ubicación</th><th>Estado</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>#S001</td><td>#E003 — Ropa</td><td>Jessica R.</td><td>2026-03-19 13:45</td><td>19.0487, -98.2064</td><td><span class="badge badge-blue">En camino</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesion')">Ver en mapa</button></td></tr>
+            <tr><td>#S002</td><td>#E001 — Víveres</td><td>Jessica R.</td><td>2026-03-15 10:00</td><td>19.0401, -98.1980</td><td><span class="badge badge-green">Completada</span></td><td><button class="btn btn-secondary btn-sm" onclick="openModal('modal-sesion')">Ver detalle</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal detalle sesión GPS -->
+<div class="modal-overlay" id="modal-sesion">
+  <div class="modal">
+    <div class="modal-header"><h3>Sesión de entrega GPS</h3><button class="btn btn-secondary btn-sm btn-icon" onclick="closeModal('modal-sesion')">✕</button></div>
+    <div class="modal-body">
+      <div style="background:var(--bg);border-radius:8px;height:200px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;margin-bottom:1rem;">🗺 Vista del mapa GPS aquí</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Latitud</label><input type="text" placeholder="19.0487" readonly></div>
+        <div class="form-group"><label>Longitud</label><input type="text" placeholder="-98.2064" readonly></div>
+        <div class="form-group full"><label>Estado</label><select><option>En camino</option><option>Completada</option><option>Problema</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-sesion')">Cerrar</button>
+      <button class="btn btn-primary" onclick="saveAndClose('modal-sesion','entrega')">Actualizar estado</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('seguimiento');</script>
+</body>
+</html>

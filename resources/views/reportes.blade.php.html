@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportes — Iskalli</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<div class="layout">
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="topbar"><div class="topbar-title">Reportes</div></div>
+    <div class="content">
+
+      <!-- Filtros globales de fecha -->
+      <div class="card" style="margin-bottom:12px;">
+        <div class="card-header">
+          <h3>Filtros de reporte</h3>
+          <div class="toolbar">
+            <input type="date" style="width:140px;" value="2026-01-01">
+            <input type="date" style="width:140px;" value="2026-03-31">
+            <select style="width:150px;"><option>Todas las campañas</option><option>Invierno 2026</option><option>Víveres Marzo</option></select>
+            <button class="btn btn-primary">Generar reporte</button>
+            <button class="btn btn-secondary">Exportar Excel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs del período -->
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-label">Donaciones recibidas</div><div class="kpi-value">$84,200</div><div class="kpi-sub">Período seleccionado</div></div>
+        <div class="kpi amber"><div class="kpi-label">Beneficiarios atendidos</div><div class="kpi-value">210</div></div>
+        <div class="kpi blue"><div class="kpi-label">Entregas completadas</div><div class="kpi-value">618</div></div>
+        <div class="kpi pink"><div class="kpi-label">Voluntarios activos</div><div class="kpi-value">2</div></div>
+      </div>
+
+      <div class="two-col">
+        <!-- Donaciones por tipo -->
+        <div class="card">
+          <div class="card-header"><h3>Donaciones por tipo</h3></div>
+          <table>
+            <thead><tr><th>Tipo</th><th>Cantidad</th><th>% del total</th></tr></thead>
+            <tbody>
+              <tr><td>Monetaria</td><td>$65,800</td><td>78%</td></tr>
+              <tr><td>Víveres</td><td>320 kg</td><td>—</td></tr>
+              <tr><td>Ropa</td><td>200 pzas</td><td>—</td></tr>
+              <tr><td>Medicamentos</td><td>50 cajas</td><td>—</td></tr>
+              <tr><td>Útiles escolares</td><td>100 pzas</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Entregas por comunidad -->
+        <div class="card">
+          <div class="card-header"><h3>Entregas por comunidad</h3></div>
+          <table>
+            <thead><tr><th>Comunidad</th><th>Entregas</th><th>Beneficiarios</th></tr></thead>
+            <tbody>
+              <tr><td>San Marcos</td><td>280</td><td>98</td></tr>
+              <tr><td>La Loma</td><td>195</td><td>72</td></tr>
+              <tr><td>El Rincón</td><td>143</td><td>40</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Top donadores -->
+      <div class="card">
+        <div class="card-header"><h3>Top donadores del período</h3></div>
+        <table>
+          <thead><tr><th>Donador</th><th>Tipo</th><th># Donaciones</th><th>Total aportado</th><th>Nivel</th></tr></thead>
+          <tbody>
+            <tr><td>Empresa Alfa S.A.</td><td>Moral</td><td>8</td><td>$52,000</td><td><span class="badge badge-blue">Oro</span></td></tr>
+            <tr><td>María García López</td><td>Física</td><td>5</td><td>$14,200</td><td><span class="badge badge-amber">Plata</span></td></tr>
+            <tr><td>Luis Torres Reyes</td><td>Física</td><td>3</td><td>$8,000</td><td><span class="badge badge-gray">Bronce</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<script src="../assets/layout.js"></script>
+<script src="../assets/app.js"></script>
+<script>renderLayout('reportes');</script>
+</body>
+</html>
