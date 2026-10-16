@@ -9,9 +9,33 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
 {{--    https://fontawesome.com/search?q=user&o=r&ic=free--}}
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+  <style>
+    .usuarios-table th {
+      white-space: nowrap;
+    }
+
+    .usuarios-table td {
+      vertical-align: middle;
+    }
+
+    .table-toolbar {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .table-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 </head>
 
@@ -193,6 +217,54 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Usuarios registrados</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-toolbar">
+              <div class="text-muted">Registros de la tabla usuarios</div>
+              <input id="buscarUsuario" class="form-control" type="search" placeholder="Buscar usuario..." style="max-width: 280px;">
+            </div>
+
+            <div class="table-responsive">
+              <table id="tablaUsuarios" class="table table-bordered table-hover usuarios-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Rol</th>
+                    <th>Nombre completo</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de creación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse ($usuarios as $usuario)
+                    <tr>
+                      <td>{{ $usuario->id_usuario }}</td>
+                      <td>{{ $usuario->usuario }}</td>
+                      <td>{{ $usuario->contrasena }}</td>
+                      <td>{{ $usuario->rol }}</td>
+                      <td>{{ $usuario->nombre }}</td>
+                      <td>{{ $usuario->email }}</td>
+                      <td>{{ $usuario->telefono }}</td>
+                      <td>{{ $usuario->fecha_creacion }}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="8" class="text-center">No hay usuarios registrados.</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
+            </div>
+            <div id="resumenUsuarios" class="text-muted mt-3"></div>
+          </div>
+        </div>
+
         <div class="row">
 
 
@@ -429,4 +501,25 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 </body>
+<script>
+  const searchInput = document.getElementById('buscarUsuario');
+  const tableRows = Array.from(document.querySelectorAll('#tablaUsuarios tbody tr'));
+  const summary = document.getElementById('resumenUsuarios');
+
+  function updateUserTable() {
+    const search = searchInput.value.toLowerCase().trim();
+    let visibleRows = 0;
+
+    tableRows.forEach((row) => {
+      const matches = row.textContent.toLowerCase().includes(search);
+      row.style.display = matches ? '' : 'none';
+      if (matches) visibleRows++;
+    });
+
+    summary.textContent = `Mostrando ${visibleRows} de ${tableRows.length} usuarios`;
+  }
+
+  searchInput.addEventListener('input', updateUserTable);
+  updateUserTable();
+</script>
 </html>

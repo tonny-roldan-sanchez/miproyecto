@@ -10,12 +10,23 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 // Importa la fachada Log para escribir en los archivos de registro
 
 class ApiSupplierController extends Controller
 {
     private Usuario $usuario;
+
+    public function mostrarDatos(): JsonResponse
+    {
+        try {
+            return response()->json(DB::connection('MySql2_LaragonLocal')->table('usuarios')->get());
+        } catch (\Throwable $e) {
+            return response()->json(['mensaje' => 'No se pudo consultar la tabla usuarios.'], 503);
+        }
+    }
+
     public function __construct(Usuario $usuario) //Concepto de inyeción de dependencias
     {
         $this->usuario = $usuario;

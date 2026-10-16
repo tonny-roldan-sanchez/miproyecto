@@ -9,6 +9,15 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    public function mostrarDatos()
+    {
+        try {
+            return response()->json(DB::connection('MySql2_LaragonLocal')->table('usuarios')->get());
+        } catch (\Throwable $e) {
+            return response()->json(['mensaje' => 'No se pudo consultar la tabla usuarios.'], 503);
+        }
+    }
+
     public function showLoginForm()
     {
         return view('AuthViews.InicioSesion');
@@ -20,31 +29,27 @@ class AuthController extends Controller
         $usuario = $request->usuario;
         $pass = $request->contrasennia;
 
-        $resUsuario = DB::connection('MySql2_LaragonLocal')->
-        table('usuarios')
-            ->select('id', 'nombre_completo', 'contrasennia', 'activo')
-            ->where('nombre_usuario', '=', $usuario)
+        $resUsuario = DB::connection('MySqlUsuarios')
+            ->table('usuarios')
+            ->select('idUsuario', 'nombre', 'apellidos', 'contrasena')
+            ->where('correo', $usuario)
             ->first();
 
-        //Si el tipo de dato del campo activo es entero, no es necesario convertir a entero en laravel
-        //Laravel identifica el tipo de dato y así declara la variable.
-        if ($resUsuario && Hash::check($pass, $resUsuario->contrasennia)) {
-            if (intval($resUsuario->activo) == 1) {
-//              echo "Coreo: $correo <br>";
-//              echo "Pass: $pass <br>";
-//              $passCifrado=Hash::make($pass);
-//              echo "Pass Hash: $passCifrado <br>";
-                session()->put('id', $resUsuario->id);
-                session()->put('nombreCompleto', $resUsuario->nombre_completo);
-                return redirect('/profile');
-                //$token = str::uuid()->toString(); //IIID Universally Unique Identifier
-                //$profileReact="http://localhost:5173/?token=' . $token;";
-                //return redirect()->away($profileReact);
-            } else {
-                return redirect('/login')
-                    ->with('loginCorecto', 'false')
-                    ->with('mensaje', 'No has confirmado tu correo');
+        $contrasenaValida = $resUsuario
+            && (Hash::check($pass, $resUsuario->contrasena)
+                || hash_equals((string) $resUsuario->contrasena, (string) $pass));
+
+        if ($contrasenaValida) {
+            if (!str_starts_with((string) $resUsuario->contrasena, '$2y$')) {
+                DB::connection('MySqlUsuarios')
+                    ->table('usuarios')
+                    ->where('idUsuario', $resUsuario->idUsuario)
+                    ->update(['contrasena' => Hash::make($pass)]);
             }
+
+            session()->put('id', $resUsuario->idUsuario);
+            session()->put('nombreCompleto', trim($resUsuario->nombre . ' ' . $resUsuario->apellidos));
+            return redirect('/profile');
         } else {
             return redirect('/login')
                 ->with('loginCorecto', 'false')
